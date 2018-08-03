@@ -1,20 +1,19 @@
 $(document).ready(function () {
-    var wanted;
 
     $(".submit-button").on("click", function () {
 
         event.preventDefault();
 
-        wanted = $("#toDevourIt").val().trim();
+        userInput2 = $("#toDevourIt").val().trim();
 
 
         $("#toDevourIt").val("");
 
 
-        $.post("/api/burgers/:id", { name: wanted }, function (data) {
+        $.post("/api/burgers/:id", { name: userInput2 }, function (data) {
 
         }).then(function () {
-            console.log("mummy");
+           
             location.reload();
         })
     })

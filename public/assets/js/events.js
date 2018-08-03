@@ -1,21 +1,24 @@
 $(document).ready(function () {
 
     $(".submit-button").on("click", function () {
-
+        var id = $(this).data("id");
         event.preventDefault();
 
         userInput2 = $("#toDevourIt").val().trim();
 
+        var devourThebtn = {
+            devoured: true
+        };
 
-        $("#toDevourIt").val("");
-
-
-        $.post("/api/burgers/:id", { name: userInput2 }, function (data) {
-
-        }).then(function () {
-           
-            location.reload();
-        })
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: devourThebtn
+        }).then(
+            function(){
+                console.log("it has been devoured");
+                location.reload();
+            }
+        );
     })
 
     $(".buttonAdd").on("click", function (event) {

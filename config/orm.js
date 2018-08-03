@@ -11,11 +11,11 @@ var orm = {
         });
     },
 
-    insertOne: function(burger, cb){
+    insertOne: function (burger, cb) {
         var queryString = "INSERT INTO burgers (burger_name) VALUES(?)";
-        connection.query(queryString, [burger], function(err, results){
+        connection.query(queryString, [burger], function (err, results) {
             console.log("Bro4");
-            if (err){
+            if (err) {
                 console.log("Error" + err);
             }
 
@@ -23,13 +23,25 @@ var orm = {
         })
     },
 
-    updateOne: function(id, cb){
-        var queryString = "UPDATE burgers SET devoured = true WHERE id = ?";
-        connection.query(queryString, [id], function(err, results){
-            if (err){
+    updateOne: function (table, objColVals, condition, cb) {
+        console.log("lucky number");
+        console.log(objColVals);
+        var queryString = "UPDATE " + table;
+
+        queryString += " SET ";
+        queryString += "devoured = " + objColVals.devoured;
+        queryString += " WHERE ";
+        queryString += condition;
+
+        console.log(queryString);
+
+        connection.query(queryString, function (err, results) {
+            console.log("gigidy");
+            if (err) {
                 throw err;
             }
 
+            
             cb(results);
         })
 

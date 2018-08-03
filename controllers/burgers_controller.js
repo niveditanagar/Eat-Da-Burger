@@ -7,8 +7,8 @@ var burger = require("../models/burger.js");
 
 
 //Creating all routes
-router.get("/", function(req, res){
-    burger.selectAll(function(data){
+router.get("/", function (req, res) {
+    burger.selectAll(function (data) {
         var hbsObject = {
             burgers: data
         };
@@ -17,25 +17,25 @@ router.get("/", function(req, res){
     })
 });
 
-router.post("/api/burgers", function(req, res){
-    burger.insertOne(req.body.burger_name, function(){
+router.post("/api/burgers", function (req, res) {
+    burger.insertOne(req.body.burger_name, function () {
         res.redirect("/");
     });
 });
 
-router.put("/api/burgers/:id", function(req, res){
-    console.log("YOOOOO");
-    var condition =  "id = " + req.params.id;
+router.put("/api/burgers/:id", function (req, res) {
 
-    console.log("condition", condition);
+    var condition = "id = " + req.params.id;
+    console.log(req.param.id);
 
-    burger.updateOne(req.body, condition, function(results){
+    burger.updateOne(req.body, condition, function (result) {
+
         if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
-          res.status(200).end();
+            res.status(200).end();
         }
-       
+
     });
 });
 
